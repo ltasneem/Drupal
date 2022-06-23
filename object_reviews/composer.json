@@ -1,0 +1,9 @@
+{
+    "name": "hsa/object_reviews",
+    "autoload": {
+        "psr-4": {
+            "Hsa\\ObjectReviews\\": "src/"
+        }
+    },
+    "require": {}
+}
