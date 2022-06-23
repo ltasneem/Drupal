@@ -1,0 +1,72 @@
+zoo.animals_list:
+  path: '/animals'
+  defaults:
+    _controller: '\Drupal\zoo\Controller\AnimalsListController::listAnimals'
+    _title: 'Our Animals'
+  requirements:
+    _permission: 'access content'
+
+zoo.habitats_list:
+  path: '/habitats/{habitat}'
+  defaults:
+    _controller: '\Drupal\zoo\Controller\AnimalsListController::listAnimalsInHabitat'
+    _title_callback: '\Drupal\zoo\Controller\AnimalsListController::listAnimalsInHabitatTitle'
+    habitat: all
+  requirements:
+    _permission: 'access content'
+
+zoo.demo_insert:
+  path: '/demo-insert'
+  defaults:
+    _controller: '\Drupal\zoo\Controller\AnimalsListController::demoInsert'
+    _title: 'Demo: Insert Queries'
+  requirements:
+    _permission: 'access content'
+
+zoo.demo_update:
+  path: '/demo-update'
+  defaults:
+    _controller: '\Drupal\zoo\Controller\AnimalsListController::demoUpdate'
+    _title: 'Demo: Update Queries'
+  requirements:
+    _permission: 'access content'
+
+zoo.demo_delete:
+  path: '/demo-delete'
+  defaults:
+    _controller: '\Drupal\zoo\Controller\AnimalsListController::demoDelete'
+    _title: 'Demo: Delete Queries'
+  requirements:
+    _permission: 'access content'
+
+zoo.animal_view:
+  path: '/animals/{animal_id}'
+  defaults:
+    _controller: '\Drupal\zoo\Controller\AnimalViewController::animalView'
+    _title_callback: '\Drupal\zoo\Controller\AnimalViewController::animalViewTitle'
+  requirements:
+    _permission: 'access content'
+
+zoo.animal_edit:
+  path: '/animals/{animal_id}/edit'
+  defaults:
+    _form: '\Drupal\zoo\Form\AnimalEditForm'
+    _title: 'Edit Animal'
+  requirements:
+    _permission: 'administer zoo'
+
+zoo.animal_add:
+  path: '/animals/add'
+  defaults:
+    _form: '\Drupal\zoo\Form\AnimalEditForm'
+    _title: 'Add Animal'
+  requirements:
+    _permission: 'administer zoo'
+
+zoo.animal_delete:
+  path: '/animals/{animal_id}/delete'
+  defaults:
+    _form: '\Drupal\zoo\Form\AnimalDeleteForm'
+    _title: 'Delete Animal'
+  requirements:
+    _permission: 'administer zoo'
