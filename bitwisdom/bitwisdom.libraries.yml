@@ -1,0 +1,52 @@
+global-styling:
+  version: 1.x
+  css:
+    base:
+      css/base.css: {}
+    layout:
+      css/layout.css: {}
+    component:
+      css/components/node.css: {}
+      css/components/table.css: {}
+    state:
+      css/state.css: {}
+    theme:
+      css/style.css: {}
+      css/print.css: { media: print }
+
+font-awesome:
+  remote: https://fortawesome.github.io/Font-Awesome/
+  version: 4.6.3
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/mit-license.html
+    gpl-compatible: true
+  css:
+    theme:
+      https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css: { type: external, minified: true }
+
+article-style:
+  version: 1.x
+  css:
+    theme:
+      css/article.css: {}
+
+global-scripts:
+  version: 1.x
+  js:
+    js/global.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+node:
+  version: 1.x
+  css:
+    theme:
+      css/node-additions.css: {}
+
+user-contact-button:
+  version: 1.x
+  css:
+    component:
+      css/components/user-contact-button.css: {}
