@@ -1,0 +1,30 @@
+fonts:
+  remote: https://fonts.google.com/
+  version: 1.x
+  license:
+    name: Google Fonts Terms of Use
+    url: https://developers.google.com/terms/
+    gpl-compatible: false
+  css:
+    theme:
+      http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic: { type: external, minified: true }
+
+bootstrap-grid:
+  version: 3.3.7
+  css:
+    layout:
+      css/grid12.css: {}
+
+global-styling:
+  version: 1.x
+  css:
+    layout:
+      css/layout-mobile.css: {}
+      css/layout-desktop.css: {}
+    theme:
+      css/style.css: {}
+      css/style-mobile.css: {}
+      css/style-desktop.css: {}
+  dependencies:
+    - dopetrope/fonts
+    - dopetrope/bootstrap-grid

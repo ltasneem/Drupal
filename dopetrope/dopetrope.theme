@@ -1,0 +1,65 @@
+<?php
+
+function dopetrope_preprocess_block(&$variables)
+{
+  $variables['is_front_page'] = \Drupal::service('path.matcher')->isFrontPage();
+
+  if ($variables['plugin_id'] == 'page_title_block') {
+    $route_name = \Drupal::service('current_route_match')->getRouteName();
+    if ($route_name == 'entity.node.canonical') {
+      $node = \Drupal::service('current_route_match')->getParameter('node');
+
+      if (in_array($node->getType(), ['portfolio_item', 'blog_entry'])) {
+        $variables['content'] = NULL;
+      }
+    }
+  }
+
+  if (
+    !empty($variables['content']['field_field_link']['#items'][0]) &&
+    $variables['content']['field_field_link']['#bundle'] == 'banner'
+  ) {
+    $variables['url'] = $variables['content']['field_field_link']['#items'][0]->getUrl()->toString();
+  }
+
+  // Get color for the pennant in Intro blocks.
+  if (
+    !empty($variables['content']['field_color']['#items'][0]) &&
+    $variables['content']['field_color']['#bundle'] == 'intro_block'
+  ) {
+    $variables['color'] = $variables['content']['field_color']['#items'][0]->getString();
+  }
+
+  // Get icon for the pennant in Intro blocks.
+  if (
+    !empty($variables['content']['field_icon']['#items'][0]) &&
+    $variables['content']['field_icon']['#bundle'] == 'intro_block'
+  ) {
+    $variables['icon'] = $variables['content']['field_icon']['#items'][0]->getString();
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function dopetrope_theme_suggestions_block_alter(array &$suggestions, array $variables)
+{
+  if (isset($variables['elements']['content']['#block_content'])) {
+    array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
+  }
+}
+
+
+function dopetrope_preprocess_field(&$variables)
+{
+  if ($variables['entity_type'] == 'block_content' && $variables['field_name'] == 'field_field_link') {
+    foreach ($variables['items'] as $i => $item) {
+      $variables['items'][$i]['content']['#attributes']['class'][] = 'button';
+      if ($variables['element']['#bundle'] == 'box_block') {
+        $variables['items'][$i]['content']['#attributes']['class'][] = 'button-alt';
+      }
+    }
+  }
+}
